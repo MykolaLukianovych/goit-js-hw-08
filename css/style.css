@@ -29,8 +29,7 @@ ol {
   flex-wrap: wrap;
   gap: 24px;
   width: 1128px;
-  margin-left: 400px;
-  margin-top: 150px;
+  margin: auto;
 }
 
 .gallery-image {

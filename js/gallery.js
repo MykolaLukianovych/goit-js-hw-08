@@ -67,19 +67,39 @@ const images = [
 
 const gallery = document.querySelector(".gallery");
 gallery.insertAdjacentHTML("beforeend", createGallery(images));
+gallery.addEventListener("click", handleClick);
 
 
 function createGallery(arr) {
     return arr.map(item => `
     <li class="gallery-item">
-  <a class="gallery-link" href="${item.original}" onclick="return false;">
+    <a class="gallery-link" href="${item.original}" onclick="return false;">
     <img
       class="gallery-image"
       src="${item.preview}"
       data-source="${item.original}"
       alt="${item.description}"
     />
-  </a>
+   </a>
 </li>
     `).join("")
+}
+
+function handleClick(event) {
+  if (event.target === event.currentTarget) {
+    return;
+  }
+  
+  const currentImage = event.target.closest(".gallery-image");
+  
+  const originalLink = currentImage.dataset.source;
+
+
+  const modalImg = basicLightbox.create(`
+      <div class="modal">
+        <img src="${originalLink}" alt="${currentImage.alt}"/>
+      </div>
+    `);
+  
+  modalImg.show();
 }
